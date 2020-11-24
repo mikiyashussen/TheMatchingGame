@@ -1,6 +1,6 @@
 
 body {
-    background-color: #32AAC6;
+    background-color: #f5fafc;
 }
 
 .container {
@@ -15,34 +15,58 @@ body {
 }
 
 .header {
-    border: black 2px solid; 
+    /* border: black 2px solid;  */
     grid-column: 1/-1;
     text-align: center;
+    padding-left: 80px;
     width: 100%;
+    
 }
 
 .scores {
-    border: lightseagreen 2px solid;
+    /* border: lightseagreen 2px solid; */
     /* grid-column: 1/2; */
     display: grid;
 
 }
 
 .cards {
-    border: olivedrab 2px solid;
+    /* border: olivedrab 2px solid; */
     grid-column: 2/-1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 20px; 
-    padding: 20px;
+    padding: 10px;
+    padding-top: 0;
     text-align: center;
+    
+    
 }
 
 .game-cards {
-    border: black 1px solid;
+    /* border: black 1px solid; */
+    background-color: #197f96;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    background-image: url(./bird.jpg);
+    background-size: cover;
 }
 
-.game-stats {
-    border: black 1px solid;
+/* .game-stats {
+    border: black 1px solid; 
+} */
+
+.hidden {
+    display: none;
 }
+
+/* .card-1-back {
+    background-image: url(./bird.jpg);
+    background-size: cover;
+} */
