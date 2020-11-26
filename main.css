@@ -40,12 +40,14 @@ body {
     padding: 10px;
     padding-top: 0;
     text-align: center;
+    border: black 1px solid;
     
     
 }
 
-.game-cards {
-    /* border: black 1px solid; */
+.single-card{
+    
+    font-size: 5em;
     background-color: #197f96;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -54,8 +56,7 @@ body {
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
     border-radius: 5px;
-    background-image: url(./bird.jpg);
-    background-size: cover;
+    /* background-size: cover; */
 }
 
 /* .game-stats {
@@ -65,8 +66,3 @@ body {
 .hidden {
     display: none;
 }
-
-/* .card-1-back {
-    background-image: url(./bird.jpg);
-    background-size: cover;
-} */
