@@ -12,7 +12,7 @@ function flipCard(card) {
     // check for match if 2 cards flipped contniously
     if(classArray.length === 2){
         let timer = setTimeout(checkMatch, 2000);
-        classArray.length = 0;
+        
     }
     // chekcMatch();
 
@@ -30,9 +30,21 @@ function checkMatch(){
         }
         else{
             console.log("cards not Equal");
-            // flip back cards
-            document.querySelector(classArray[0].children[0].toggle("hidden"));
-            document.querySelector(classArray[0].children[0].toggle("hidden"));
+            // // flip back cards
+            // document.querySelector(classArray[0].children[0].classList.toggle("hidden"));
+            // document.querySelector(classArray[0].children[1].classList.toggle("hidden"));
+            // let x = classArray[0]
+            // debugger;
+            let first = document.getElementsByClassName(classArray[0]);
+            let second = document.getElementsByClassName(classArray[1]);
+            first[0].children[0].classList.toggle("hidden");
+            first[0].children[1].classList.toggle("hidden");
+
+            second[0].children[0].classList.toggle("hidden");
+            second[0].children[1].classList.toggle("hidden");
+
+            // document.querySelector(classArray[1].children[0].classList.toggle("hidden"));
+            // document.querySelector(classArray[1].children[1].classList.toggle("hidden"));
         }
         classArray.length = 0;
     }
