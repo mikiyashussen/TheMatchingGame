@@ -1,15 +1,28 @@
 
-//.............Eventlistener for every Card.........
+
 let cards = document.querySelectorAll(".single-card");
-let classArray = [];
+let classArray = [];// array to check matching cards
 function flipCard(card) {
 
-    console.log(card);
+    // console.log(card);
     classArray.push(card.className);
     card.children[1].classList.toggle("hidden");
     card.children[0].classList.toggle("hidden");
 
-    // check for array length and if 2 ,do comparision
+    // check for match if 2 cards flipped contniously
+    if(classArray.length === 2){
+        let timer = setTimeout(checkMatch, 2000);
+        classArray.length = 0;
+    }
+    // chekcMatch();
+
+    
+}
+
+
+// ...........Matching Check..........
+function checkMatch(){
+    //check for array length and if 2 ,do comparision
     if(classArray.length === 2){
         if(classArray[0] === classArray[1]){
             console.log("cards Equal");
@@ -18,11 +31,16 @@ function flipCard(card) {
         else{
             console.log("cards not Equal");
             // flip back cards
-            
+            document.querySelector(classArray[0].children[0].toggle("hidden"));
+            document.querySelector(classArray[0].children[0].toggle("hidden"));
         }
         classArray.length = 0;
     }
+    
 }
+
+
+////.............Eventlistener for every Card.........
 cards.forEach(function (item) {
     let clickCount = 0;
     item.addEventListener("click", function() {
