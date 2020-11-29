@@ -22,6 +22,35 @@ function flipCard(card) {
     
 }
 
+// ............... Start Game..........
+let startGame = document.querySelector(".start-game");
+startGame.addEventListener('click', init);
+
+
+
+// ......timer function.........
+let minutes = document.querySelector("#minutes");
+let seconds = document.querySelector("#seconds");
+let totalSeconds = 0;
+function init() {
+    setInterval(setTime, 1000);
+}
+
+function setTime() {
+    totalSeconds++;
+    seconds.innerHTML = pad(totalSeconds%60);
+    minutes.innerHTML = pad(parseInt(totalSeconds/60));
+}
+
+function pad(val) {
+    let valString = val + "";
+    if(valString.length < 2){
+        return "0" + valString;
+    }
+    else{
+        return valString;
+    }
+}
 
 // ...........Matching Check..........
 function checkMatch(){
