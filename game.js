@@ -1,4 +1,6 @@
+let clickCount = 0;
 
+let moves = document.querySelector(".number-of-moves");
 
 let cards = document.querySelectorAll(".single-card");
 let classArray = [];// array to check matching cards
@@ -11,8 +13,9 @@ function flipCard(card) {
 
     // check for match if 2 cards flipped contniously
     if(classArray.length === 2){
-        let timer = setTimeout(checkMatch, 2000);
-        
+        clickCount++;
+        moves.children[0].innerHTML = clickCount;
+        setTimeout(checkMatch, 300);
     }
     // chekcMatch();
 
@@ -24,9 +27,9 @@ function flipCard(card) {
 function checkMatch(){
     //check for array length and if 2 ,do comparision
     if(classArray.length === 2){
-        //get-tid of the class number
-        let firstClass = classArray[0].slice((classArray[0].length-1));
-        let secondClass = classArray[0].slice((classArray[1].length-1));
+        //get-tid of the class number   
+        let firstClass = classArray[0].slice(0,classArray[0].length-1);
+        let secondClass = classArray[1].slice(0,classArray[1].length-1);
 
         if(firstClass === secondClass){
             console.log("cards Equal");
@@ -58,13 +61,11 @@ function checkMatch(){
 
 ////.............Eventlistener for every Card.........
 cards.forEach(function (item) {
-    let clickCount = 0;
+    
     item.addEventListener("click", function() {
         // debugger;
         // console.log(item);
         flipCard(item);
-        
-        
     })
 });
 
@@ -85,9 +86,7 @@ let cards = document.querySelectorAll(".single-card");
     cards.forEach(function(item) {
         item.children[1].classList.add("hidden");
         item.children[0].classList.remove("hidden");
-        
     })
-    
 }
 
 // const cards = document.querySelectorAll(".single-card");
