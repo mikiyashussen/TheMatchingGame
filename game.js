@@ -24,7 +24,11 @@ function flipCard(card) {
 function checkMatch(){
     //check for array length and if 2 ,do comparision
     if(classArray.length === 2){
-        if(classArray[0] === classArray[1]){
+        //get-tid of the class number
+        let firstClass = classArray[0].slice((classArray[0].length-1));
+        let secondClass = classArray[0].slice((classArray[1].length-1));
+
+        if(firstClass === secondClass){
             console.log("cards Equal");
             // count score
         }
