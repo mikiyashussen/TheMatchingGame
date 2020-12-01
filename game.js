@@ -2,6 +2,7 @@
 let startGame = document.querySelector(".start-game");
 let newGameBtn = document.querySelector('.new-game');
 let cards = document.querySelectorAll(".single-card");
+let title = document.querySelector("h1");
 
 let moves = document.querySelector(".number-of-moves");
 let minutes = document.querySelector("#minutes");
@@ -20,9 +21,6 @@ startGame.addEventListener('click', init);
 function init() {
     setInterval(setTime, 1000);
     // if 8 matches display winner and stop timer
-    if(correctMatches === 8){
-        console.log("WINNER WINNER!! Chiken Dinner!!")
-    }
 }
 
 
@@ -81,6 +79,9 @@ function checkMatch(){
 
         if(firstClass === secondClass){
             correctMatches++;
+            if(correctMatches === 8){
+                winner();
+            }
         }
         else{
             // // flip back cards
@@ -102,15 +103,12 @@ function checkMatch(){
     
 }
 
-
-
-
-
-
-
+//............Winner FUnction..............//
+function winner() {
+    title.innerHTML = "WINNER WINNER!! Chicken Dinner!!";
+    title.style.color = "red";
+}
 // ...................NEW GAME BUTTON....................//
-
-
 newGameBtn.addEventListener('click', newGame);
 
 function newGame() {
