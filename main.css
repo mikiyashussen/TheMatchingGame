@@ -15,19 +15,16 @@ body {
 }
 
 .header {
-    /* border: black 2px solid;  */
     grid-column: 1/-1;
     text-align: center;
     padding-left: 80px;
-    width: 100%;
-    
+    width: 100%;  
 }
 
 .scores {
     /* border: lightseagreen 2px solid; */
     /* grid-column: 1/2; */
     display: grid;
-
 }
 
 .cards {
@@ -40,13 +37,9 @@ body {
     padding: 10px;
     padding-top: 0;
     text-align: center;
-    border: black 1px solid;
-    
-    
 }
 
 .single-card{
-    
     font-size: 5em;
     background-color: #197f96;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -58,10 +51,6 @@ body {
     border-radius: 5px;
     /* background-size: cover; */
 }
-
-/* .game-stats {
-    border: black 1px solid; 
-} */
 
 .hidden {
     display: none;

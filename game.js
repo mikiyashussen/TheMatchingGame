@@ -1,16 +1,46 @@
-let clickCount = 0;
+
+let startGame = document.querySelector(".start-game");
+let newGameBtn = document.querySelector('.new-game');
+let cards = document.querySelectorAll(".single-card");
 
 let moves = document.querySelector(".number-of-moves");
+let minutes = document.querySelector("#minutes");
+let seconds = document.querySelector("#seconds");
 
-let cards = document.querySelectorAll(".single-card");
-let classArray = [];// array to check matching cards
+let totalSeconds = 0; // timer before start of game
+let classArray = [];// array to store class name of cards to check for matching 
+let clickCount = 0; // number of moves counter
+let correctMatches = 0;
+
+
+startGame.addEventListener('click', init);
+
+
+//.............game initialization function...............//
+function init() {
+    setInterval(setTime, 1000);
+    // if 8 matches display winner and stop timer
+    if(correctMatches === 8){
+        console.log("WINNER WINNER!! Chiken Dinner!!")
+    }
+}
+
+
+//..............Eventlistener for every Card....................//
+cards.forEach(function (item) {
+    item.addEventListener("click", function() {
+        flipCard(item);
+    })
+});
+
+
+
+
 function flipCard(card) {
-
-    // console.log(card);
-    classArray.push(card.className);
+    
     card.children[1].classList.toggle("hidden");
     card.children[0].classList.toggle("hidden");
-
+    classArray.push(card.className);
     // check for match if 2 cards flipped contniously
     if(classArray.length === 2){
         clickCount++;
@@ -18,32 +48,21 @@ function flipCard(card) {
         setTimeout(checkMatch, 300);
     }
     // chekcMatch();
-
-    
 }
 
-// ............... Start Game..........
-let startGame = document.querySelector(".start-game");
-startGame.addEventListener('click', init);
 
 
 
-// ......timer function.........
-let minutes = document.querySelector("#minutes");
-let seconds = document.querySelector("#seconds");
-let totalSeconds = 0;
-function init() {
-    setInterval(setTime, 1000);
-}
 
+// ....................timer function..........................//
 function setTime() {
     totalSeconds++;
-    seconds.innerHTML = pad(totalSeconds%60);
-    minutes.innerHTML = pad(parseInt(totalSeconds/60));
+    seconds.innerHTML = timerTextFormatting(totalSeconds%60);
+    minutes.innerHTML = timerTextFormatting(parseInt(totalSeconds/60));
 }
 
-function pad(val) {
-    let valString = val + "";
+function timerTextFormatting(val) {
+    let valString = val + ""; // covert the number to string to use string.Length method
     if(valString.length < 2){
         return "0" + valString;
     }
@@ -52,35 +71,31 @@ function pad(val) {
     }
 }
 
-// ...........Matching Check..........
+// .....................Matching Check............................//
 function checkMatch(){
     //check for array length and if 2 ,do comparision
     if(classArray.length === 2){
-        //get-tid of the class number   
+        //get-rid of the number attached to the class name  
         let firstClass = classArray[0].slice(0,classArray[0].length-1);
         let secondClass = classArray[1].slice(0,classArray[1].length-1);
 
         if(firstClass === secondClass){
-            console.log("cards Equal");
-            // count score
+            correctMatches++;
         }
         else{
-            console.log("cards not Equal");
             // // flip back cards
             // document.querySelector(classArray[0].children[0].classList.toggle("hidden"));
+            //.this doesn't work cuz querselector returns the div but getElementByClassName return HTML collection
+            //...with the value as the [0] element of the collection
             // document.querySelector(classArray[0].children[1].classList.toggle("hidden"));
-            // let x = classArray[0]
             // debugger;
-            let first = document.getElementsByClassName(classArray[0]);
-            let second = document.getElementsByClassName(classArray[1]);
-            first[0].children[0].classList.toggle("hidden");
-            first[0].children[1].classList.toggle("hidden");
+            let firstCard = document.getElementsByClassName(classArray[0]);
+            let secondCard = document.getElementsByClassName(classArray[1]);
+            firstCard[0].children[0].classList.toggle("hidden");
+            firstCard[0].children[1].classList.toggle("hidden");
 
-            second[0].children[0].classList.toggle("hidden");
-            second[0].children[1].classList.toggle("hidden");
-
-            // document.querySelector(classArray[1].children[0].classList.toggle("hidden"));
-            // document.querySelector(classArray[1].children[1].classList.toggle("hidden"));
+            secondCard[0].children[0].classList.toggle("hidden");
+            secondCard[0].children[1].classList.toggle("hidden");
         }
         classArray.length = 0;
     }
@@ -88,40 +103,25 @@ function checkMatch(){
 }
 
 
-////.............Eventlistener for every Card.........
-cards.forEach(function (item) {
-    
-    item.addEventListener("click", function() {
-        // debugger;
-        // console.log(item);
-        flipCard(item);
-    })
-});
-
 
 
 
 
 
 // ...................NEW GAME BUTTON....................//
-let newGameBtn = document.querySelector('.new-game');
+
 
 newGameBtn.addEventListener('click', newGame);
 
 function newGame() {
-let cards = document.querySelectorAll(".single-card");
-    
-    // debugger;
+    let cards = document.querySelectorAll(".single-card");
     cards.forEach(function(item) {
         item.children[1].classList.add("hidden");
         item.children[0].classList.remove("hidden");
     })
+
+    // conut back to zero
+    clickCount = 0;
+    moves.children[0].innerHTML = clickCount;
+    totalSeconds = 0;
 }
-
-// const cards = document.querySelectorAll(".single-card");
-
-// function flipCard() {
-//     debugger;
-//   this.classList.toggle("hidden");
-// }
-// cards.forEach((card) => card.addEventListener("click", flipCard))
