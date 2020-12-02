@@ -12,6 +12,7 @@ let totalSeconds = 0; // timer before start of game
 let classArray = [];// array to store class name of cards to check for matching 
 let clickCount = 0; // number of moves counter
 let correctMatches = 0;
+let end;
 
 
 startGame.addEventListener('click', init);
@@ -19,7 +20,7 @@ startGame.addEventListener('click', init);
 
 //.............game initialization function...............//
 function init() {
-    setInterval(setTime, 1000);
+    end = setInterval(setTime, 1000);
     // if 8 matches display winner and stop timer
 }
 
@@ -81,6 +82,7 @@ function checkMatch(){
             correctMatches++;
             if(correctMatches === 8){
                 winner();
+                
             }
         }
         else{
@@ -107,6 +109,7 @@ function checkMatch(){
 function winner() {
     title.innerHTML = "WINNER WINNER!! Chicken Dinner!!";
     title.style.color = "red";
+    clearInterval(end);
 }
 // ...................NEW GAME BUTTON....................//
 newGameBtn.addEventListener('click', newGame);
@@ -117,9 +120,14 @@ function newGame() {
         item.children[1].classList.add("hidden");
         item.children[0].classList.remove("hidden");
     })
-
+    clearInterval(end);
+    title.innerHTML = "The Matching Game";
+    title.style.color = "Black";
     // conut back to zero
     clickCount = 0;
     moves.children[0].innerHTML = clickCount;
     totalSeconds = 0;
+    seconds.innerHTML = 0;
+    minutes.innerHTML = 0;
+    // end = setInterval(setTime, 1000);
 }
