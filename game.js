@@ -1,4 +1,4 @@
-
+// Accessing  DOm Elements
 let startGame = document.querySelector(".start-game");
 let newGameBtn = document.querySelector('.new-game');
 let cards = document.querySelectorAll(".single-card");
@@ -8,11 +8,13 @@ let moves = document.querySelector(".number-of-moves");
 let minutes = document.querySelector("#minutes");
 let seconds = document.querySelector("#seconds");
 
+//Global Variables
 let totalSeconds = 0; // timer before start of game
 let classArray = [];// array to store class name of cards to check for matching 
 let clickCount = 0; // number of moves counter
 let correctMatches = 0;
-let end;
+let endOfTimer;
+let stateVariable;
 
 
 startGame.addEventListener('click', init);
@@ -20,8 +22,7 @@ startGame.addEventListener('click', init);
 
 //.............game initialization function...............//
 function init() {
-    end = setInterval(setTime, 1000);
-    // if 8 matches display winner and stop timer
+    endOfTimer = setInterval(setTime, 1000);
 }
 
 
@@ -34,7 +35,7 @@ cards.forEach(function (item) {
 
 
 
-
+//................flip cardds...........//
 function flipCard(card) {
     
     card.children[1].classList.toggle("hidden");
@@ -46,14 +47,11 @@ function flipCard(card) {
         moves.children[0].innerHTML = clickCount;
         setTimeout(checkMatch, 300);
     }
-    // chekcMatch();
+   
 }
 
 
-
-
-
-// ....................timer function..........................//
+// ...................Timer function..........................//
 function setTime() {
     totalSeconds++;
     seconds.innerHTML = timerTextFormatting(totalSeconds%60);
@@ -81,7 +79,9 @@ function checkMatch(){
         if(firstClass === secondClass){
             correctMatches++;
             if(correctMatches === 8){
-                winner();
+                title.innerHTML = "WINNER WINNER!! Chicken Dinner!!";
+                title.style.color = "red";
+                clearInterval(endOfTimer);
                 
             }
         }
@@ -105,29 +105,27 @@ function checkMatch(){
     
 }
 
-//............Winner FUnction..............//
-function winner() {
-    title.innerHTML = "WINNER WINNER!! Chicken Dinner!!";
-    title.style.color = "red";
-    clearInterval(end);
-}
+
 // ...................NEW GAME BUTTON....................//
 newGameBtn.addEventListener('click', newGame);
-
 function newGame() {
-    let cards = document.querySelectorAll(".single-card");
+    //end timer
+    clearInterval(endOfTimer);
+    
+    // reset initial values
+    clickCount = 0;
+    totalSeconds = 0;
+    seconds.innerHTML = 0;
+    minutes.innerHTML = 0;
+
+    // Update DOM with initial Values
+    moves.children[0].innerHTML = clickCount;
+    title.innerHTML = "The Matching Game";
+    title.style.color = "Black";
+    const cards = document.querySelectorAll(".single-card");
     cards.forEach(function(item) {
         item.children[1].classList.add("hidden");
         item.children[0].classList.remove("hidden");
     })
-    clearInterval(end);
-    title.innerHTML = "The Matching Game";
-    title.style.color = "Black";
-    // conut back to zero
-    clickCount = 0;
-    moves.children[0].innerHTML = clickCount;
-    totalSeconds = 0;
-    seconds.innerHTML = 0;
-    minutes.innerHTML = 0;
-    // end = setInterval(setTime, 1000);
+    
 }
